@@ -4,6 +4,7 @@ const apiUrl =
 async function checkweather(city) {
   const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
   var data = await response.json();
+  console.log(data);
   const er = document.querySelector(".error");
   const dis = document.querySelector(".weather");
   if (response.status == 404) {
@@ -46,3 +47,30 @@ searchBox.addEventListener("keypress", function (event) {
     checkweather(searchBox.value);
   }
 });
+
+const axios = require("axios");
+
+const options = {
+  method: "GET",
+  url: "https://transloc-api-1-2.p.rapidapi.com/agencies.json",
+  params: {
+    callback: "call",
+    geo_area: "35.80176,-78.64347|35.78061,-78.68218",
+    agencies: "12",
+  },
+  headers: {
+    "X-RapidAPI-Key": "4a313d2637mshc4519affe4c1248p1b2720jsn05c002a47330",
+    "X-RapidAPI-Host": "transloc-api-1-2.p.rapidapi.com",
+  },
+};
+
+/* try {
+  const response = await axios.request(options);
+  console.log(response.data);
+} catch (error) {
+  console.error(error);
+} */
+async function check() {
+  const response = await axios.request(options);
+  console.log(response.data);
+}
